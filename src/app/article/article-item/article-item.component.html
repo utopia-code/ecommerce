@@ -1,0 +1,16 @@
+<div class="article-container"
+    [class]="article.isOnSale ? 'is-on-sale' : 'no-sale'">
+    <div class="article-img"><img src="{{ article.imageUrl }}"></div>
+    <div class="article-body">
+        <h3 class="article-title">{{ article.name }}</h3>
+        <div class="article-price">{{ article.price }}€</div>
+        <div class="article-sale">
+            <button class="btn btn-negative"
+                (click)="removeArticle()"
+                [disabled]="article.isDisabledButton() ? 'true' : null">&minus;</button>
+            <div class="article-amount">{{ article.quantityInCart }}</div>
+            <button class="btn btn-positive"
+            (click)="addArticle()">&plus;</button>
+        </div>
+    </div>
+</div>
