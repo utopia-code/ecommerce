@@ -1,0 +1,59 @@
+.article-container {
+    max-width: 350px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+
+    &.no-sale {
+        filter: grayscale(1) opacity(50%);
+
+        .article-img {
+            img {
+                filter: blur(2px)
+            }
+        } 
+    }
+}
+
+.article-img {
+    img {
+        max-width: 100%;
+        border-radius: 4px 4px 0px 0px;
+    }
+} 
+
+.article-body {
+    padding: 1rem;
+}
+
+.article-title {
+    margin: 0;
+}
+
+.article-price {
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin: .5rem 0;
+}
+
+.article-sale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-amount {
+    padding: 1rem;
+}
+
+.btn {
+    padding: .2rem .8rem;
+    border: 1px solid #000;
+    font-size: 1.5rem;
+    color: #000;
+    background-color: transparent;
+    transition: color .15s ease, background-color .15s ease;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
