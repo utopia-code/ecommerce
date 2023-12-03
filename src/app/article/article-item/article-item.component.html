@@ -1,10 +1,15 @@
 <div class="article-container"
     [class]="article.isOnSale ? 'is-on-sale' : 'is-sold-out'">
-    <div class="article-img"><img src="{{ article.imageUrl }}"></div>
+    <div class="article-img"
+    [class.active]="article.isOnSale"
+    [class.disabled]="!article.isOnSale"><img src="{{ article.imageUrl }}"></div>
     <div class="article-body">
         <h3 class="article-title">{{ article.name }}</h3>
-        <div class="article-price">{{ article.price }}€</div>
-        <div class="article-sale">
+        <div class="article-price"
+        [class.active]="article.isOnSale"
+        [class.disabled]="!article.isOnSale">{{ article.price }}€</div>
+        <div class="article-sale"
+            *ngIf="article.isOnSale">
             <button class="btn btn-negative"
                 (click)="removeArticle()"
                 [disabled]="article.isDisabledButton() ? 'true' : null">&minus;</button>
