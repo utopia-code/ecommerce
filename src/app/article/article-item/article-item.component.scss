@@ -4,13 +4,7 @@
     border: 1px solid #eee;
 
     &.is-sold-out {
-        filter: grayscale(1) opacity(50%);
-
-        .article-img {
-            img {
-                filter: blur(2px)
-            }
-        } 
+        filter: grayscale(1); 
     }
 }
 
@@ -18,6 +12,10 @@
     img {
         max-width: 100%;
         border-radius: 4px 4px 0px 0px;
+    }
+
+    &.disabled img {
+        filter: blur(2px)
     }
 } 
 
@@ -33,6 +31,10 @@
     font-weight: 500;
     font-size: 1.8rem;
     margin: .5rem 0;
+
+    &.disabled {
+        filter: opacity(30%)
+    }
 }
 
 .article-sale {
@@ -45,15 +47,4 @@
     padding: 1rem;
 }
 
-.btn {
-    padding: 0 .8rem .3rem;
-    border: 1px solid #000;
-    font-size: 1.5rem;
-    color: #000;
-    background-color: transparent;
-    transition: color .15s ease, background-color .15s ease;
-    &:hover {
-        background-color: #000;
-        color: #fff;
-    }
-}
+
