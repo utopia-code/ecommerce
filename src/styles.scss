@@ -23,3 +23,16 @@ button[disabled] {
     background-color: #000;
     color: #fff
 }
+
+.btn {
+    padding: 0 .8rem .3rem;
+    border: 1px solid #000;
+    font-size: 1.5rem;
+    color: #000;
+    background-color: transparent;
+    transition: color .15s ease, background-color .15s ease;
+    &:hover {
+        background-color: #000;
+        color: #fff;
+    }
+}
