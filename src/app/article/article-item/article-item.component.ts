@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 
 @Component({
@@ -6,7 +6,7 @@ import { Article } from '../../models/article';
   templateUrl: './article-item.component.html',
   styleUrl: './article-item.component.scss'
 })
-export class ArticleItemComponent {
+export class ArticleItemComponent implements OnInit {
   public article: Article;
 
   constructor() {}
