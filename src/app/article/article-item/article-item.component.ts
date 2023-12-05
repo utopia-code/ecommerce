@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 
 @Component({
@@ -7,12 +7,12 @@ import { Article } from '../../models/article';
   styleUrl: './article-item.component.scss'
 })
 export class ArticleItemComponent implements OnInit {
-  public article: Article;
+  @Input() public article: Article;
 
   constructor() {}
 
   ngOnInit() {
-    this.article = new Article('Ilustración 7 de Sanchi Herrera', '../../../assets/pexels-beatriz-jara-8882691.jpg', 187, true, 1)
+    // this.article = new Article('Ilustración 7 de Sanchi Herrera', '../../../assets/pexels-beatriz-jara-8882691.jpg', 187, true, 1)
   }
 
   addArticle() {
