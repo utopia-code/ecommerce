@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Article } from '../../models/article';
+import { ArticleQuantityChange } from '../../models/article-quantity-change';
 
 @Component({
   selector: 'app-article-item',
@@ -8,20 +9,28 @@ import { Article } from '../../models/article';
 })
 export class ArticleItemComponent implements OnInit {
   @Input() public article: Article;
+  @Output() private articleQuantity = new EventEmitter<ArticleQuantityChange>;
 
   constructor() {}
 
-  ngOnInit() {
-    // this.article = new Article('Ilustración 7 de Sanchi Herrera', '../../../assets/pexels-beatriz-jara-8882691.jpg', 187, true, 1)
+  ngOnInit() {}
+
+  private emitArticleQuantity() {
+    this.articleQuantity.emit({
+      articleObj: this.article,
+      totalQuantity: this.article.quantityInCart
+    });
   }
 
   addArticle() {
-    return this.article.quantityInCart++;
+    this.article.quantityInCart++;
+    this.emitArticleQuantity();
   }
 
   removeArticle() {
     if (this.article.quantityInCart > 0) {
-      return this.article.quantityInCart--;
+      this.article.quantityInCart--;
+      this.emitArticleQuantity();
     }
   }
 }
