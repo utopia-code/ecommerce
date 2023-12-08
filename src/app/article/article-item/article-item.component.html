@@ -8,14 +8,6 @@
         <div class="article-price"
         [class.active]="article.isOnSale"
         [class.disabled]="!article.isOnSale">{{ article.price }}€</div>
-        <div class="article-sale"
-            *ngIf="article.isOnSale">
-            <button class="btn btn-negative"
-                (click)="removeArticle()"
-                [disabled]="article.isDisabledButton() ? 'true' : null">&minus;</button>
-            <div class="article-amount">{{ article.quantityInCart }}</div>
-            <button class="btn btn-positive"
-            (click)="addArticle()">&plus;</button>
-        </div>
+        <ng-content></ng-content>
     </div>
 </div>
