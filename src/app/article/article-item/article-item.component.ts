@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Article } from '../../models/article';
 import { ArticleQuantityChange } from '../../models/article-quantity-change';
 
 @Component({
   selector: 'app-article-item',
   templateUrl: './article-item.component.html',
-  styleUrl: './article-item.component.scss'
+  styleUrl: './article-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleItemComponent implements OnInit {
   @Input() public article: Article;
@@ -20,17 +21,5 @@ export class ArticleItemComponent implements OnInit {
       articleObj: this.article,
       totalQuantity: this.article.quantityInCart
     });
-  }
-
-  addArticle() {
-    this.article.quantityInCart++;
-    this.emitArticleQuantity();
-  }
-
-  removeArticle() {
-    if (this.article.quantityInCart > 0) {
-      this.article.quantityInCart--;
-      this.emitArticleQuantity();
-    }
   }
 }
