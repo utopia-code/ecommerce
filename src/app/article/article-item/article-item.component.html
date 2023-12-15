@@ -4,7 +4,7 @@
     [class.active]="article.isOnSale"
     [class.disabled]="!article.isOnSale"><img src="{{ article.imageUrl }}"></div>
     <div class="article-body">
-        <h3 class="article-title">{{ article.name }}</h3>
+        <h5 class="article-title">{{ article.name }}</h5>
         <div class="article-price"
         [class.active]="article.isOnSale"
         [class.disabled]="!article.isOnSale">{{ article.price }}€</div>
