@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'ecommerce';
+  title = 'Design Center';
+
+  currentComponent: string = 'article-list';
+
+  onShowedComponent(event: {content: string}) {
+    this.currentComponent = event.content;
+  }
 }
+

@@ -1,15 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Inicio</a>
+    <div class="navbar-brand" (click)="showComponent('article-list')">Inicio</div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        <a class="nav-link" href="#">Artículos</a>
-        <a class="nav-link" href="#">Nuevo artículo template</a>
-        <a class="nav-link" href="#" tabindex="-1">Nuevo artículo reactivo</a>
+        <li class="nav-link active" (click)="showComponent('article-list')">Artículos</li>
+        <li class="nav-link" (click)="showComponent('new-template')">Nuevo artículo template</li>
+        <li class="nav-link" (click)="showComponent('new-reactive-template')" tabindex="-1">Nuevo artículo reactivo</li>
       </div>
     </div>
   </div>
