@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Design Center';
-
   currentComponent: string = 'article-list';
 
   onShowedComponent(event: {content: string}) {

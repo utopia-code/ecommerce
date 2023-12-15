@@ -3,21 +3,21 @@
     <div class="navbar-brand" 
       (click)="showComponent('article-list')"
       [class.active]="isNavItemActive('article-list')">Inicio</div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNavAltMarkup" 
+            aria-controls="navbarNavAltMarkup" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <div class="nav-link" 
-          (click)="showComponent('article-list')"
-          [class.active]="isNavItemActive('article-list')">Artículos</div>
-        <div class="nav-link" 
-          (click)="showComponent('new-template')"
-          [class.active]="isNavItemActive('new-template')">Nuevo artículo template</div>
-        <div class="nav-link" 
-          (click)="showComponent('new-reactive-template')"
-          [class.active]="isNavItemActive('new-reactive-template')"
-          tabindex="-1">Nuevo artículo reactivo</div>
+          *ngFor="let item of itemsNav"
+          (click)="showComponent(item.link)"
+          [class.active]="isNavItemActive(item.link)">{{ item.component }}</div>
       </div>
     </div>
   </div>

@@ -8,15 +8,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class NavbarComponent {
   @Output() changeContent = new EventEmitter<{content: string}>();
   currentComponent: string = 'article-list';
-  navItemActive: string = 'article-list';
+
+  itemsNav: Array<{link: string, component: string}> = [
+    {link: 'article-list', component: 'Artículos'},
+    {link: 'new-template', component: 'Nuevo artículo template'},
+    {link: 'new-reactive-template', component: 'Nuevo artículo reactivo'},
+  ]
 
   showComponent(componentName: string) {
     this.currentComponent = componentName;
-    this.navItemActive = componentName;
     this.changeContent.emit({content: this.currentComponent});
   }
 
   isNavItemActive(componentName: string): boolean {
-    return this.navItemActive === componentName;
+    return this.currentComponent === componentName;
   }
 }
