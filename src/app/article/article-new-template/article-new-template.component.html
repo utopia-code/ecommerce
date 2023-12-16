@@ -1,1 +1,40 @@
-<p>article-new-template works!</p>
+<div class="form-group">
+  <form (ngSubmit)="createArticle(templateForm)" #templateForm="ngForm" >
+    <div ngModelGroup="article">
+      <div class="article-name">
+        <input type="text"
+              placeholder="Art Work Name"
+              name="name"
+              #name="ngModel"
+              required
+              ngModel>
+      </div>
+      <div class="article-price">
+        <input type="number"
+              placeholder="Art Work Price"
+              name="price"
+              #price="ngModel"
+              required
+              ngModel>
+      </div>
+      <div class="article-image-url">
+        <input type="text"
+              placeholder="Art Work Image Url"
+              required
+              minlength="2"
+              name="imageUrl"
+              #imageUrl="ngModel"
+              ngModel>
+      </div>
+      <div class="article-is-on-sale">
+        <div>
+          <input type="checkbox"
+                name="isOnSale"
+                ngModel>
+                On Sale
+        </div>
+      </div>
+    </div>
+    <button type="submit">Create Article</button>
+  </form>
+</div>
