@@ -8,6 +8,7 @@ import { ArticleListComponent } from './article/article-list/article-list.compon
 import { NavbarComponent } from './navbar/navbar.component';
 import { ArticleNewTemplateComponent } from './article/article-new-template/article-new-template.component';
 import { ArticleNewReactiveTemplateComponent } from './article/article-new-reactive-template/article-new-reactive-template.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ArticleNewReactiveTemplateComponent } from './article/article-new-react
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
