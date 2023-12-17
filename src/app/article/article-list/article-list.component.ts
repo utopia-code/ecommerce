@@ -11,11 +11,11 @@ import { ArticleQuantityChange } from '../../models/article-quantity-change';
         (articleQuantity)="onArticleQuantity($event)">
         <div class="article-sale"
             *ngIf="article.isOnSale">
-            <button class="btn btn-negative"
+            <button class="btn btn-dark btn-negative"
                 (click)="removeArticle(i)"
                 [disabled]="article.isDisabledButton() ? 'true' : null">&minus;</button>
             <div class="article-amount">{{ article.quantityInCart }}</div>
-            <button class="btn btn-positive"
+            <button class="btn btn-dark btn-positive"
             (click)="addArticle(i)">&plus;</button>
         </div>  
       </app-article-item>

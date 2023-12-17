@@ -1,64 +1,71 @@
 <div class="form-group">
   <form (ngSubmit)="createArticle(templateForm)" #templateForm="ngForm" >
     <div ngModelGroup="article">
-      <div class="article-name">
+      <div class="article-name mb-3">
         <input type="text"
+              class="form-control"
               placeholder="Art Work Name"
               name="name"
               #nameInput="ngModel"
               required
               ngModel>
+
+        <div *ngIf="(nameInput.dirty || templateForm.submitted) && nameInput.errors?.required" class="form-text">
+          Art Work name is required
+        </div>
       </div>
 
-      <div *ngIf="(nameInput.dirty || templateForm.submitted) && nameInput.errors?.required">
-        Art Work name is required
-      </div>
-
-      <div class="article-price">
+      <div class="article-price mb-3">
         <input type="number"
+              class="form-control"
               placeholder="Art Work Price"
               name="price"
               #priceInput="ngModel"
               required
               ngModel>
+
+        <div *ngIf="(priceInput.dirty || templateForm.submitted) && priceInput.errors?.required" class="form-text">
+          Art Work price is required
+        </div>
       </div>
 
-      <div *ngIf="(priceInput.dirty || templateForm.submitted) && priceInput.errors?.required">
-        Art Work price is required
-      </div>
-
-      <div class="article-image-url">
+      <div class="article-image-url mb-3">
         <input type="text"
+              class="form-control"
               placeholder="Art Work Image Url"
               required
               name="imageUrl"
               #imageUrlInput="ngModel"
               ngModel>
-      </div>
 
-      <div *ngIf="templateForm.submitted && imageUrlInput.errors?.required && !imageUrlInput.dirty">
-          Art Work image URL is required
-      </div>
-
-      <div *ngIf="imageUrlInput.dirty">
-        <div *ngIf="imageUrlInput.errors?.required">
-          Art Work image URL is required
+        <div *ngIf="templateForm.submitted && imageUrlInput.errors?.required && !imageUrlInput.dirty" class="form-text">
+            Art Work image URL is required
         </div>
-
-        <div *ngIf="!validateImageUrl(imageUrlInput.value) && imageUrlInput.value !== ''">
-          Art Work image URL does not seem to be a valid URL
+  
+        <div *ngIf="imageUrlInput.dirty">
+          <div *ngIf="imageUrlInput.errors?.required" class="form-text">
+            Art Work image URL is required
+          </div>
+  
+          <div *ngIf="!validateImageUrl(imageUrlInput.value) && imageUrlInput.value !== ''" class="form-text">
+            Art Work image URL does not seem to be a valid URL
+          </div>
         </div>
       </div>
 
-      <div class="article-is-on-sale">
-        <div>
-          <input type="checkbox"
+      <div class="article-is-on-sale mb-3 form-check">
+          <input id="checkboxOnSale"
+                type="checkbox"
+                class="form-check-input"
                 name="isOnSale"
                 ngModel>
-                On Sale
-        </div>
+                
+          <label class="form-check-label" for="checkboxOnSale">
+            On Sale
+          </label>
+              
       </div>
     </div>
-    <button type="submit">Create Article</button>
+    <button type="submit" class="btn btn-dark">Create Article</button>
   </form>
 </div>
