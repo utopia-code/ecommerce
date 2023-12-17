@@ -5,27 +5,51 @@
         <input type="text"
               placeholder="Art Work Name"
               name="name"
-              #name="ngModel"
+              #nameInput="ngModel"
               required
               ngModel>
       </div>
+
+      <div *ngIf="(nameInput.dirty || templateForm.submitted) && nameInput.errors?.required">
+        Art Work name is required
+      </div>
+
       <div class="article-price">
         <input type="number"
               placeholder="Art Work Price"
               name="price"
-              #price="ngModel"
+              #priceInput="ngModel"
               required
               ngModel>
       </div>
+
+      <div *ngIf="(priceInput.dirty || templateForm.submitted) && priceInput.errors?.required">
+        Art Work price is required
+      </div>
+
       <div class="article-image-url">
         <input type="text"
               placeholder="Art Work Image Url"
               required
-              minlength="2"
               name="imageUrl"
-              #imageUrl="ngModel"
+              #imageUrlInput="ngModel"
               ngModel>
       </div>
+
+      <div *ngIf="templateForm.submitted && imageUrlInput.errors?.required && !imageUrlInput.dirty">
+          Art Work image URL is required
+      </div>
+
+      <div *ngIf="imageUrlInput.dirty">
+        <div *ngIf="imageUrlInput.errors?.required">
+          Art Work image URL is required
+        </div>
+
+        <div *ngIf="!validateImageUrl(imageUrlInput.value) && imageUrlInput.value !== ''">
+          Art Work image URL does not seem to be a valid URL
+        </div>
+      </div>
+
       <div class="article-is-on-sale">
         <div>
           <input type="checkbox"
