@@ -20,8 +20,8 @@ export class ArticleNewReactiveTemplateComponent {
   createForm() {
     this.reactiveForm = this.fb.group({
       name: [null, Validators.required],
-      price: [0, Validators.required],
-      imageUrl: [null, Validators.required],
+      price: [0, [Validators.required, Validators.min(0.1)]],
+      imageUrl: [null, [Validators.required, Validators.pattern(/^(https?|ftp):\/\/[A-Za-z0-9.-]+\.[A-Za-z]{2,3}(\/[^\/\s]*)*$/)]],
       isOnSale: [null]
     });
   }
@@ -29,4 +29,8 @@ export class ArticleNewReactiveTemplateComponent {
   onSubmit() {
     console.log('Form Control Value', this.reactiveForm.value)
   }
+
+  get name() { return this.reactiveForm.get('name')}
+  get price() { return this.reactiveForm.get('price')}
+  get imageUrl() { return this.reactiveForm.get('imageUrl')}
 }
