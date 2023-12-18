@@ -1,1 +1,64 @@
-<p>article-new-reactive-template works!</p>
+<div class="form-group">
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+      <!-- <div> -->
+        <div class="article-name mb-3">
+          <input type="text"
+                class="form-control"
+                placeholder="Art Work Name"
+                formControlName="name">
+  
+          <!-- <div *ngIf="(nameInput.dirty || templateForm.submitted) && nameInput.errors?.required" class="form-text">
+            Art Work name is required
+          </div> -->
+        </div>
+  
+        <div class="article-price mb-3">
+          <input type="number"
+                class="form-control"
+                placeholder="Art Work Price"
+                formControlName="price">
+  
+          <!-- <div *ngIf="(priceInput.dirty || templateForm.submitted) && priceInput.errors?.required" class="form-text">
+            Art Work price is required
+          </div> -->
+
+        </div>
+  
+        <div class="article-image-url mb-3">
+          <input type="text"
+                class="form-control"
+                placeholder="Art Work Image Url"
+                formControlName="imageUrl">
+  
+          <!-- <div *ngIf="templateForm.submitted && imageUrlInput.errors?.required && !imageUrlInput.dirty" class="form-text">
+              Art Work image URL is required
+          </div>
+    
+          <div *ngIf="imageUrlInput.dirty">
+            <div *ngIf="imageUrlInput.errors?.required" class="form-text">
+              Art Work image URL is required
+            </div>
+    
+            <div *ngIf="!validateImageUrl(imageUrlInput.value) && imageUrlInput.value !== ''" class="form-text">
+              Art Work image URL does not seem to be a valid URL
+            </div>
+          </div> -->
+
+        </div>
+  
+        <div class="article-is-on-sale mb-3 form-check">
+            <input id="checkboxOnSale"
+                  type="checkbox"
+                  class="form-check-input"
+                  formControlName="isOnSale">
+                  
+            <label class="form-check-label" for="checkboxOnSale">
+              On Sale
+            </label>
+                
+        </div>
+
+      <!-- </div> -->
+      <button type="submit" class="btn btn-dark">Create Article</button>
+    </form>
+  </div>
