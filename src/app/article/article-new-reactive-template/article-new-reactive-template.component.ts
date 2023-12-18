@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-article-new-reactive-template',
@@ -8,14 +9,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class ArticleNewReactiveTemplateComponent {
 
-  public reactiveForm: FormGroup = new FormGroup({
-    name: new FormControl(null, Validators.required),
-    price: new FormControl(0, Validators.required),
-    imageUrl: new FormControl(null, Validators.required),
-    isOnSale: new FormControl(null)
-  });
+  public reactiveForm: FormGroup;
 
-  constructor() {}
+  
+
+  constructor(private fb: FormBuilder) {
+    this.createForm();
+  }
+
+  createForm() {
+    this.reactiveForm = this.fb.group({
+      name: [null, Validators.required],
+      price: [0, Validators.required],
+      imageUrl: [null, Validators.required],
+      isOnSale: [null]
+    });
+  }
 
   onSubmit() {
     console.log('Form Control Value', this.reactiveForm.value)
