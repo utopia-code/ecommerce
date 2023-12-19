@@ -7,9 +7,13 @@
               placeholder="Art Work Name"
               formControlName="name">
 
-        <div *ngIf="(name.dirty || form.submitted) && name.errors?.required" 
-              class="form-text">
-          Art Work name is required
+        <div *ngIf="(name.dirty || form.submitted)">
+          <div *ngIf="name.errors?.required" class="form-text">
+            Art Work name is required
+          </div>
+          <div *ngIf="name.hasError('NameArticle')" class="form-text">
+            The name of an Art Word has to be different from Prueba, Test, Mock or Fake
+          </div>
         </div>
 
       </div>
