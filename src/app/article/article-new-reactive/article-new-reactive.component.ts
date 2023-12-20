@@ -4,11 +4,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { CustomValidator } from '../../custom-validator';
 
 @Component({
-  selector: 'app-article-new-reactive-template',
-  templateUrl: './article-new-reactive-template.component.html',
-  styleUrl: './article-new-reactive-template.component.scss'
+  selector: 'app-article-new-reactive',
+  templateUrl: './article-new-reactive.component.html',
+  styleUrl: './article-new-reactive.component.scss'
 })
-export class ArticleNewReactiveTemplateComponent {
+export class ArticleNewReactiveComponent {
 
   public reactiveForm: FormGroup;
 

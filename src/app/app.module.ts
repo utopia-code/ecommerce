@@ -7,7 +7,7 @@ import { ArticleItemComponent } from './article/article-item/article-item.compon
 import { ArticleListComponent } from './article/article-list/article-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ArticleNewTemplateComponent } from './article/article-new-template/article-new-template.component';
-import { ArticleNewReactiveTemplateComponent } from './article/article-new-reactive-template/article-new-reactive-template.component';
+import { ArticleNewReactiveComponent } from './article/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ArticleListComponent,
     NavbarComponent,
     ArticleNewTemplateComponent,
-    ArticleNewReactiveTemplateComponent
+    ArticleNewReactiveComponent
   ],
   imports: [
     BrowserModule,
