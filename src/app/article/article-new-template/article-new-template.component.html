@@ -38,11 +38,7 @@
               #imageUrlInput="ngModel"
               ngModel>
 
-        <div *ngIf="templateForm.submitted && imageUrlInput.errors?.required && !imageUrlInput.dirty" class="form-text">
-            Art Work image URL is required
-        </div>
-  
-        <div *ngIf="imageUrlInput.dirty">
+        <div *ngIf="templateForm.submitted || imageUrlInput.dirty">
           <div *ngIf="imageUrlInput.errors?.required" class="form-text">
             Art Work image URL is required
           </div>
@@ -51,6 +47,7 @@
             Art Work image URL does not seem to be a valid URL
           </div>
         </div>
+        
       </div>
 
       <div class="article-is-on-sale mb-3 form-check">
