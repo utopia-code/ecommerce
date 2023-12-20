@@ -10,12 +10,9 @@ export class ArticleNewTemplateComponent {
   public article: Article;
 
   createArticle(templateForm) {
-    console.log('Article form', templateForm.value );
-    if (templateForm.valid) {
-      console.log('Creating Article', templateForm);
-    } else {
-      console.error('Template form is in an invalid state')
-    }
+    templateForm.valid 
+    ? console.log('Article form', templateForm.value )
+    :  console.error('Template form is in an invalid state', templateForm);
   }
 
   validateImageUrl(url: string): boolean {
