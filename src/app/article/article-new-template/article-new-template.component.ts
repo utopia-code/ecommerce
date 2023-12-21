@@ -9,10 +9,22 @@ import { Article } from '../../models/article';
 export class ArticleNewTemplateComponent {
   public article: Article;
 
+  constructor() {
+    this.article = new Article(4, '', '', 0, false, 0)
+  }
+
   createArticle(templateForm) {
-    templateForm.valid 
-    ? console.log('Article form', templateForm.value )
-    :  console.error('Template form is in an invalid state', templateForm);
+    if (templateForm.valid) {
+      const articleForm = templateForm.value.article;
+      this.article.name = articleForm.name;
+      this.article.price = articleForm.price;
+      this.article.imageUrl = articleForm.imageUrl;
+      this.article.isOnSale = articleForm.isOnSale;
+
+      console.log('Article object', this.article);
+    } else {
+      console.error('Template form is in an invalid state', templateForm.value);
+    }
   }
 
   validateImageUrl(url: string): boolean {
