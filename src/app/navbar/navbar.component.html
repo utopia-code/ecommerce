@@ -3,7 +3,7 @@
     <div class="navbar-brand" 
       (click)="showComponent('article-list')"
       [class.active]="isNavItemActive('article-list')">Inicio</div>
-    <button class="navbar-toggler" 
+    <button (click)="toogleMenu()" class="navbar-toggler" 
             type="button" 
             data-bs-toggle="collapse" 
             data-bs-target="#navbarNavAltMarkup" 
@@ -12,7 +12,9 @@
             aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse" 
+          id="navbarNavAltMarkup"
+          [class]="showMenuMobile ? 'show': ''">
       <div class="navbar-nav">
         <div class="nav-link" 
           *ngFor="let item of itemsNav"

@@ -8,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class NavbarComponent {
   @Output() changeContent = new EventEmitter<{content: string}>();
   currentComponent: string = 'article-list';
+  showMenuMobile = false;
 
   itemsNav: Array<{link: string, component: string}> = [
     {link: 'article-list', component: 'Artículos'},
@@ -22,5 +23,9 @@ export class NavbarComponent {
 
   isNavItemActive(componentName: string): boolean {
     return this.currentComponent === componentName;
+  }
+
+  toogleMenu() {
+    this.showMenuMobile = !this.showMenuMobile;
   }
 }
