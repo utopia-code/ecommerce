@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Article } from '../../models/article';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CustomValidator } from '../../custom-validator';
@@ -10,12 +11,12 @@ import { CustomValidator } from '../../custom-validator';
 })
 export class ArticleNewReactiveComponent {
 
+  public article: Article;
   public reactiveForm: FormGroup;
-
-  
 
   constructor(private fb: FormBuilder) {
     this.createForm();
+    this.article = new Article(5, '', '', 0, false, 0);
   }
 
   createForm() {
@@ -29,6 +30,8 @@ export class ArticleNewReactiveComponent {
 
   onSubmit() {
     console.log('Form Control Value', this.reactiveForm.value)
+    this.article = Object.assign({}, this.reactiveForm.value)
+    console.log('Article object', this.article)
   }
 
   get name() { return this.reactiveForm.get('name')}
