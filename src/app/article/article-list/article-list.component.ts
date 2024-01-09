@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 import { ArticleQuantityChange } from '../../models/article-quantity-change';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-article-list',
@@ -42,37 +43,32 @@ import { ArticleQuantityChange } from '../../models/article-quantity-change';
 })
 export class ArticleListComponent implements OnInit{
 
-  public articles: Array<Article>;
+  public articles: Article[];
 
-  constructor() { }
+  constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articles = [
-      new Article(1,'Abstract de Beatriz Jara', './assets/pexels-beatriz-jara-8882691.jpg', 185, true, 1),
-      new Article(2, 'Still life de Eberhard Grossgasteiger', './assets/pexels-eberhard-grossgasteiger-2086361.jpg', 375, false, 1),
-      new Article(3, 'Portrait de Matt Fernandes', './assets/pexels-matt-fernandes-2807495.jpg', 295, true, 1)
-    ];
+    this.articles = this.articleService.getArticles();
   }
 
-  onArticleQuantity(index, quantity) {
-    const articleChange: ArticleQuantityChange = {
-      articleObj: index,
-      totalQuantity: quantity
+  onArticleQuantity(index: Article, quantity: number) {
+    const articleChange: ArticleQuantityChange = this.articleService.changeQuantity(index.id, quantity);
+
+    if (articleChange) {
+      console.log('Reference to Article Object: ', index === articleChange.articleObj);
+      console.log('Article: ' + JSON.stringify(articleChange.articleObj))
+      console.log('Article quantity: ' + articleChange.totalQuantity)
     }
-
-    console.log('Reference to Article Object: ', index === articleChange.articleObj);
-    console.log('Article: ' + JSON.stringify(articleChange.articleObj))
-    console.log('Article quantity: ' + articleChange.totalQuantity)
   }
 
-  addArticle(index) {
+  addArticle(index: number) {
     this.articles[index].quantityInCart++;
     this.onArticleQuantity(this.articles[index], this.articles[index].quantityInCart)
     
   }
 
-  removeArticle(index) {
-    if(this.articles[index].quantityInCart >0) {
+  removeArticle(index: number) {
+    if(this.articles[index].quantityInCart > 0) {
       this.articles[index].quantityInCart--;
     }
     this.onArticleQuantity(this.articles[index], this.articles[index].quantityInCart)
