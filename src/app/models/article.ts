@@ -9,7 +9,7 @@ export class Article {
     public quantityInCart: number
   ) {}
 
-  isDisabledButton(): boolean {
-    return this.quantityInCart <= 0;
+  static isDisabledButton(article: Article): boolean {
+    return article.quantityInCart <= 0;
   }
 }
