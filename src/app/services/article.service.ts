@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../models/article';
 import { ArticleQuantityChange } from '../models/article-quantity-change';
+import { Observable, throwError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,30 +18,35 @@ export class ArticleService {
     ];
   }
 
-  getArticles() : Article[] {
-    return this.articles;
+  getArticles() : Observable<Article[]> {
+    return of(this.articles);
   }
 
-  changeQuantity(articleID: number, changeInQuantity: number): ArticleQuantityChange {
+  changeQuantity(articleID: number, changeInQuantity: number): Observable<ArticleQuantityChange> {
     const article = this.articles.find(a => a.id === articleID);
     if (article) {
       article.quantityInCart = changeInQuantity++;
-      return {
+      return of({
         articleObj: article,
         totalQuantity: article.quantityInCart
-      };
-    }
+      });
+    } 
   }
 
-  create(article: Article) {
+  create(article: Article): Observable<any> {
     let foundArticle = this.articles.find(a => a.id === article.id);
     if (foundArticle) {
-      return false;
+      return throwError(false);
     }
+
+    const lastArticle = this.articles[this.articles.length - 1];
+    const newArticleId = lastArticle ? lastArticle.id + 1 : 1;
+
+    article.id = newArticleId;
+    article.quantityInCart = 1;
+
     this.articles.push(article);
     console.log('create article: ' + JSON.stringify(this.articles))
-    return true;
+    return of(true);
   }
-
-
 }
