@@ -2,19 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from '../../models/article';
 import { ArticleQuantityChange } from '../../models/article-quantity-change';
 import { ArticleService } from '../../services/article.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-article-list',
   template: `
     <div class="section-articles">
-      <app-article-item *ngFor="let article of articles; index as i; trackBy: trackArticleById" 
+      <app-article-item *ngFor="let article of articles$ | async; index as i; trackBy: trackArticleById" 
         [article]="article"
         (articleQuantity)="onArticleQuantity($event)">
         <div class="article-sale"
             *ngIf="article.isOnSale">
             <button class="btn btn-dark btn-negative"
                 (click)="removeArticle(i)"
-                [disabled]="article.isDisabledButton() ? 'true' : null">&minus;</button>
+                [disabled]="isArticleDisabled(article)">&minus;</button>
             <div class="article-amount">{{ article.quantityInCart }}</div>
             <button class="btn btn-dark btn-positive"
             (click)="addArticle(i)">&plus;</button>
@@ -25,6 +26,7 @@ import { ArticleService } from '../../services/article.service';
     .section-articles {
       display: flex;
       justify-content: space-evenly;
+      flex-wrap: wrap;
       max-width: 1350px;
       margin: 0 auto;
       padding: 40px 20px;
@@ -43,35 +45,55 @@ import { ArticleService } from '../../services/article.service';
 })
 export class ArticleListComponent implements OnInit{
 
-  public articles: Article[];
+  public articles$: Observable<Article[]>;
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articles = this.articleService.getArticles();
+    this.articles$ = this.articleService.getArticles()
   }
 
-  onArticleQuantity(index: Article, quantity: number) {
-    const articleChange: ArticleQuantityChange = this.articleService.changeQuantity(index.id, quantity);
+  onArticleQuantity(change: ArticleQuantityChange) {
 
-    if (articleChange) {
-      console.log('Reference to Article Object: ', index === articleChange.articleObj);
-      console.log('Article: ' + JSON.stringify(articleChange.articleObj))
-      console.log('Article quantity: ' + articleChange.totalQuantity)
-    }
+    this.articleService.changeQuantity(change.articleObj.id, change.totalQuantity)
+      .subscribe(
+        updatedArticle => {
+          console.log('Reference to Article Object: ', change.articleObj === updatedArticle.articleObj);
+          console.log('Article: ' + JSON.stringify(updatedArticle.articleObj));
+          console.log('Article quantity: ' + updatedArticle.totalQuantity);
+        },
+        error => console.error('Error changing quantity:', error)
+      );
   }
 
   addArticle(index: number) {
-    this.articles[index].quantityInCart++;
-    this.onArticleQuantity(this.articles[index], this.articles[index].quantityInCart)
+    this.articles$.subscribe(articles => {
+      articles[index].quantityInCart++;
+      const change: ArticleQuantityChange = {
+        articleObj: articles[index],
+        totalQuantity: articles[index].quantityInCart
+      };
+      this.onArticleQuantity(change);
+    });
     
   }
 
   removeArticle(index: number) {
-    if(this.articles[index].quantityInCart > 0) {
-      this.articles[index].quantityInCart--;
-    }
-    this.onArticleQuantity(this.articles[index], this.articles[index].quantityInCart)
+
+    this.articles$.subscribe(articles => {
+      if (articles[index].quantityInCart > 0) {
+        articles[index].quantityInCart--;
+      }
+      const change: ArticleQuantityChange = {
+        articleObj: articles[index],
+        totalQuantity: articles[index].quantityInCart
+      };
+      this.onArticleQuantity(change);
+    });
+  }
+
+  isArticleDisabled(article: Article): boolean {
+    return Article.isDisabledButton(article);
   }
   
   trackArticleById(index, article) {
