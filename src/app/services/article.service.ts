@@ -36,7 +36,7 @@ export class ArticleService {
   create(article: Article): Observable<any> {
     let foundArticle = this.articles.find(a => a.id === article.id);
     if (foundArticle) {
-      return throwError(false);
+      return throwError(() => ({ msg: `Article with ID ${article.id} already exists` }));
     }
 
     const lastArticle = this.articles[this.articles.length - 1];
@@ -47,6 +47,6 @@ export class ArticleService {
 
     this.articles.push(article);
     console.log('create article: ' + JSON.stringify(this.articles))
-    return of(true);
+    return of(`Sucessfully created article with ID ${article.id}`);
   }
 }

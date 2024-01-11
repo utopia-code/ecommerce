@@ -26,7 +26,7 @@ export class ArticleNewReactiveComponent {
       name: [null, [Validators.required, Validators.compose([CustomValidator.NameArticleValidator(['Prueba', 'Test', 'Mock', 'Fake'])])]],
       price: [null, [Validators.required, Validators.min(0.1)]],
       imageUrl: [null, [Validators.required, Validators.pattern(/^(https?|ftp):\/\/[A-Za-z0-9.-]+\.[A-Za-z]{2,3}(\/[^\/\s]*)*$/)]],
-      isOnSale: [null]
+      isOnSale: false
     });
   }
 
@@ -35,16 +35,17 @@ export class ArticleNewReactiveComponent {
       const newArticle: Article = Object.assign({}, this.reactiveForm.value);
       this.article = newArticle;
       this.articleService.create(newArticle)
-      .subscribe(success => {
+      .subscribe((success: any) => {
           if (success) {
             console.log('Form Control Value', this.reactiveForm.value);
             console.log('Article object', this.article);
             console.log(newArticle);
+            console.log(success.msg);
 
             this.reactiveForm.reset();
-          } else {
-            console.error('New Reactive Article form is in an invalid state');
-          }
+          } 
+        }, (err) => {
+          console.error(err.msg);
         });
     } else {
       console.error('New Reactive Article form is in an invalid state');
