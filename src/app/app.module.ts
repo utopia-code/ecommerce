@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ArticleNewTemplateComponent } from './article/article-new-template/article-new-template.component';
 import { ArticleNewReactiveComponent } from './article/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
