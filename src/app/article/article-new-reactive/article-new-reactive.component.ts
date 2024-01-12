@@ -40,13 +40,10 @@ export class ArticleNewReactiveComponent {
             console.log('Form Control Value', this.reactiveForm.value);
             console.log('Article object', this.article);
             console.log(newArticle);
-            console.log(success.msg);
 
             this.reactiveForm.reset();
           } 
-        }, (err) => {
-          console.error(err.msg);
-        });
+        }, err => { console.error(`Article with ID ${this.article.id} already exists`, err); });
     } else {
       console.error('New Reactive Article form is in an invalid state');
     }
