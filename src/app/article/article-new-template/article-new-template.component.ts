@@ -10,7 +10,18 @@ export class ArticleNewTemplateComponent {
   public article: Article;
 
   constructor() {
-    this.article = new Article(4, '', '', 0, false, 0)
+    this.initializeArticle();
+  }
+
+  initializeArticle() {
+    this.article = {
+      id: 0,
+      name: '',
+      imageUrl: '',
+      price: 0, 
+      isOnSale: false,
+      quantityInCart: 0
+    }
   }
 
   createArticle(templateForm) {
