@@ -2,7 +2,7 @@
     [class]="article.isOnSale ? 'is-on-sale' : 'is-sold-out'">
     <div class="article-img"
     [class.active]="article.isOnSale"
-    [class.disabled]="!article.isOnSale"><img src="{{ article.imageUrl }}"></div>
+    [class.disabled]="!article.isOnSale"><img src="./{{ article.imageUrl }}"></div>
     <div class="article-body">
         <h5 class="article-title">{{ article.name }}</h5>
         <div class="article-price"
