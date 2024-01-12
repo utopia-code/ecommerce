@@ -11,8 +11,14 @@ import { debounceTime, switchMap,
 @Component({
   selector: 'app-article-list',
   template: `
-    <div>
-      <input name="searchBox"
+    <div class="input-group rounded">
+      <span class="input-group-text">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>
+      </span>
+      <input class="form-control"
+            name="searchBox"
             [(ngModel)]="searchString"
             placeholder="Search Here"
             (keyup)="search()">
@@ -25,11 +31,11 @@ import { debounceTime, switchMap,
         <div class="article-sale"
             *ngIf="article.isOnSale">
             <button class="btn btn-dark btn-negative"
-                (click)="removeArticle(article.id)"
+                (click)="removeArticle(article.id, $event)"
                 [disabled]="article.quantityInCart <= 0">&minus;</button>
             <div class="article-amount">{{ article.quantityInCart }}</div>
             <button class="btn btn-dark btn-positive"
-            (click)="addArticle(article.id)">&plus;</button>
+            (click)="addArticle(article.id, $event)">&plus;</button>
         </div>  
       </app-article-item>
     </div>`,
@@ -41,6 +47,11 @@ import { debounceTime, switchMap,
       max-width: 1350px;
       margin: 0 auto;
       padding: 40px 20px;
+    }
+
+    .input-group {
+      margin: 50px auto 30px;
+      max-width: 400px;
     }
 
     .article-sale {
@@ -76,8 +87,9 @@ export class ArticleListComponent implements OnInit{
     this.searchTerms.next(this.searchString);
   }
 
-  addArticle(articleID: number) {
+  addArticle(articleID: number, event: Event) {
     event.preventDefault();
+
     this.articleService.changeQuantity(articleID, 1)
       .subscribe(
         response => {
@@ -87,8 +99,9 @@ export class ArticleListComponent implements OnInit{
       );
   }
 
-  removeArticle(articleID: number) {
+  removeArticle(articleID: number, event: Event) {
     event.preventDefault();
+
     this.articleService.changeQuantity(articleID, -1)
       .subscribe(
         response => {
