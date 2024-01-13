@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,12 @@ import { ArticleNewTemplateComponent } from './article/article-new-template/arti
 import { ArticleNewReactiveComponent } from './article/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/es';
+import localeDeExtra from '@angular/common/locales/extra/es';
+
+registerLocaleData(localeDe, 'es-ES', localeDeExtra);
 
 @NgModule({
   declarations: [
@@ -27,7 +33,12 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-ES'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
