@@ -10,6 +10,7 @@ import { ArticleNewTemplateComponent } from './article/article-new-template/arti
 import { ArticleNewReactiveComponent } from './article/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DefectImgPipe } from './pipes/defect-img.pipe';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/es';
@@ -24,7 +25,8 @@ registerLocaleData(localeDe, 'es-ES', localeDeExtra);
     ArticleListComponent,
     NavbarComponent,
     ArticleNewTemplateComponent,
-    ArticleNewReactiveComponent
+    ArticleNewReactiveComponent,
+    DefectImgPipe
   ],
   imports: [
     BrowserModule,
