@@ -13,10 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DefectImgPipe } from './pipes/defect-img.pipe';
 
 import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/es';
-import localeDeExtra from '@angular/common/locales/extra/es';
+import localeES from '@angular/common/locales/es';
+import localeESExtra from '@angular/common/locales/extra/es';
 
-registerLocaleData(localeDe, 'es-ES', localeDeExtra);
+registerLocaleData(localeES, 'es-ES', localeESExtra);
 
 @NgModule({
   declarations: [
