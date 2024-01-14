@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../models/article';
-import { ArticleQuantityChange } from '../models/article-quantity-change';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,8 +16,8 @@ export class ArticleService {
     return this.http.get<Article[]>(`${this.urlAPI}?q=${query}`);
   }
 
-  changeQuantity(articleID: number, changeInQuantity: number): Observable<ArticleQuantityChange> {
-    return this.http.patch<ArticleQuantityChange>(`${this.urlAPI}/${articleID}`,
+  changeQuantity(articleID: number, changeInQuantity: number): Observable<Article> {
+    return this.http.patch<Article>(`${this.urlAPI}/${articleID}`,
     { changeInQuantity })
   }
 
