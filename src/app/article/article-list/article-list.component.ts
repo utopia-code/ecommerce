@@ -3,7 +3,7 @@ import { Article } from '../../models/article';
 import { ArticleService } from '../../services/article.service';
 import { Observable } from 'rxjs';
 
-import { Subject } from 'rxjs';
+import { Subject, merge } from 'rxjs';
 import { debounceTime, switchMap,
          distinctUntilChanged, startWith,
          share } from 'rxjs/operators';
@@ -69,18 +69,24 @@ export class ArticleListComponent implements OnInit{
 
   public articles$: Observable<Article[]>;
   public searchString: string = '';
-
   private searchTerms: Subject<string> = new Subject();
+  private reloadProductsList: Subject<void> = new Subject();
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articles$ = this.searchTerms.pipe(
-      startWith(this.searchString),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap((query) => this.articleService.getArticles(query)),
-      share()
-    )
+    this.articles$ = merge(
+      this.searchTerms.pipe(
+        startWith(this.searchString),
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((query) => this.articleService.getArticles(query)),
+        share()
+      ),
+      this.reloadProductsList.pipe(
+        switchMap(() => this.articleService.getArticles(this.searchString))
+      )
+    );
   }
 
   search() {
@@ -93,7 +99,7 @@ export class ArticleListComponent implements OnInit{
     this.articleService.changeQuantity(articleID, 1)
       .subscribe(
         response => {
-          this.articles$ = this.articleService.getArticles(this.searchString);
+          this.reloadProductsList.next();  // Disparar la recarga de la lista
         },
         error => console.error('Error adding article:', error)
       );
@@ -105,7 +111,7 @@ export class ArticleListComponent implements OnInit{
     this.articleService.changeQuantity(articleID, -1)
       .subscribe(
         response => {
-          this.articles$ = this.articleService.getArticles(this.searchString);
+          this.reloadProductsList.next();  // Disparar la recarga de la lista
         },
         error => console.error('Error removing article:', error)
       );
