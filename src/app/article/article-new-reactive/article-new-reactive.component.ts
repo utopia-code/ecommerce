@@ -25,7 +25,7 @@ export class ArticleNewReactiveComponent {
     this.reactiveForm = this.fb.group({
       name: [null, [Validators.required, Validators.compose([CustomValidator.NameArticleValidator(['Prueba', 'Test', 'Mock', 'Fake'])])]],
       price: [null, [Validators.required, Validators.min(0.1)]],
-      imageUrl: [null, [Validators.required, Validators.pattern(/^(https?|ftp):\/\/[A-Za-z0-9.-]+\.[A-Za-z]{2,3}(\/[^\/\s]*)*$/)]],
+      imageUrl: [null, [Validators.required, Validators.pattern(/^http(s?):\/\/[A-Za-z0-9.-]+\.[A-Za-z]{2,3}(\/[^\/\s]*)*$/)]],
       isOnSale: false
     });
   }
