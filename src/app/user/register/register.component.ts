@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Login } from '../../models/login';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +13,10 @@ export class RegisterComponent {
   public login: Login;
   public registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.createForm();
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService) {
+      this.createForm();
   }
 
   createForm() {
@@ -25,9 +28,18 @@ export class RegisterComponent {
 
   registerUser() {
     if (this.registerForm.valid) {
-      const newData: Login = Object.assign({}, this.registerForm.value);
-      this.login = newData;
-      console.log(newData)
+      const data: Login = Object.assign({}, this.registerForm.value);
+      this.login = data;
+      console.log(data)
+      this.userService.register(data.username, data.password)
+        .subscribe((success) => {
+          if (success) {
+            console.log('Successfully registered', success);
+            this.registerForm.reset();
+          }
+        }, (err) => {
+          console.error('Error registering', err.error)
+        })
     }
   }
 
