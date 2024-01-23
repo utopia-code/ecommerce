@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { ArticleListComponent } from './articles/article-list/article-list.component';
+import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
@@ -28,7 +29,8 @@ registerLocaleData(localeES, 'es-ES', localeESExtra);
     ArticleNewReactiveComponent,
     DefectImgPipe,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
