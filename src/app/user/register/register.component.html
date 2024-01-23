@@ -22,7 +22,9 @@
             formControlName="password">
 
       <div *ngIf="(password.dirty || form.submitted)">
-        
+        <div *ngIf="password.errors?.required" class="form-text">
+          A password is required
+        </div>
         <div *ngIf="password.errors?.minlength" class="form-text">
           The password must be at least 8 characters long
         </div>
