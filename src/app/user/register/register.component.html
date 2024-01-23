@@ -1,7 +1,7 @@
 <div class="form-group">
-  <form [formGroup]="loginForm" #form="ngForm" (ngSubmit)="loginUser()">
+  <form [formGroup]="registerForm" #form="ngForm" (ngSubmit)="registerUser()">
     
-    <div class="login-username mb-3">
+    <div class="register-username mb-3">
       <input type="text"
             class="form-control"
             placeholder="username"
@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="login-password mb-3">
+    <div class="register-password mb-3">
       <input type="password"
             class="form-control"
             placeholder="password"
@@ -30,6 +30,6 @@
 
     </div>
 
-    <button type="submit" class="btn btn-dark">Sign in</button>
+    <button type="submit" class="btn btn-dark">Create user</button>
   </form>
 </div>

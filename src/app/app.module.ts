@@ -7,6 +7,7 @@ import { ArticleItemComponent } from './articles/article-item/article-item.compo
 import { ArticleListComponent } from './articles/article-list/article-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
 import { ArticleNewReactiveComponent } from './articles/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +27,8 @@ registerLocaleData(localeES, 'es-ES', localeESExtra);
     NavbarComponent,
     ArticleNewReactiveComponent,
     DefectImgPipe,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
