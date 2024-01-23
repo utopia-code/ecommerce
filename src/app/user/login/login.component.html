@@ -1,0 +1,35 @@
+<div class="form-group">
+  <form [formGroup]="loginForm" #form="ngForm" (ngSubmit)="loginUser()">
+    
+    <div class="login-username mb-3">
+      <input type="text"
+            class="form-control"
+            placeholder="username"
+            formControlName="username">
+
+      <div *ngIf="(username.dirty || form.submitted)">
+        <div *ngIf="username.errors?.required" class="form-text">
+          An username is required
+        </div>
+      </div>
+
+    </div>
+
+    <div class="login-password mb-3">
+      <input type="password"
+            class="form-control"
+            placeholder="password"
+            formControlName="password">
+
+      <div *ngIf="(password.dirty || form.submitted)">
+        
+        <div *ngIf="password.errors?.minlength" class="form-text">
+          The password must be at least 8 characters long
+        </div>
+      </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-dark">Create user</button>
+  </form>
+</div>
