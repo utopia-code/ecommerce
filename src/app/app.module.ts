@@ -11,8 +11,13 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { ArticleNewReactiveComponent } from './articles/article-new-reactive/article-new-reactive.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DefectImgPipe } from './pipes/defect-img.pipe';
+
+import { ArticleService } from './services/article.service';
+import { UserService } from './services/user.service';
+import { UserStoreService } from './services/user-store.service';
+import { ArticleAppInterceptor } from './services/article-app.interceptor';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -43,6 +48,14 @@ registerLocaleData(localeES, 'es-ES', localeESExtra);
     {
       provide: LOCALE_ID,
       useValue: 'es-ES'
+    },
+    ArticleService,
+    UserService,
+    UserStoreService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ArticleAppInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
