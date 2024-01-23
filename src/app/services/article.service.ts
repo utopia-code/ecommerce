@@ -12,16 +12,16 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
-  getArticles(query: string) : Observable<Article[]> {
-    return this.http.get<Article[]>(`${this.urlAPI}?q=${query}`);
+  getArticles(query?: string) : Observable<Article[]> {
+    return this.http.get<Article[]>(this.urlAPI, { params: { q: query } });
   }
 
-  changeQuantity(articleID: number, changeInQuantity: number): Observable<Article> {
-    return this.http.patch<Article>(`${this.urlAPI}/${articleID}`,
-    { changeInQuantity })
+  changeQuantity(articleID: number, changeInQuantity: number): Observable<any> {
+    return this.http.patch(`${this.urlAPI}/${articleID}`,
+    { changeInQuantity: changeInQuantity })
   }
 
-  create(article: Article): Observable<any> {
-    return this.http.post(this.urlAPI, article)
+  create(article: Article): Observable<Article> {
+    return this.http.post<Article>(this.urlAPI, article)
   }
 }

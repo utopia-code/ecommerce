@@ -99,6 +99,7 @@ export class ArticleListComponent implements OnInit{
     this.articleService.changeQuantity(articleID, 1)
       .subscribe(
         response => {
+          console.log(response.msg);
           this.reloadProductsList.next();
         },
         error => console.error('Error adding article:', error)
@@ -111,6 +112,7 @@ export class ArticleListComponent implements OnInit{
     this.articleService.changeQuantity(articleID, -1)
       .subscribe(
         response => {
+          console.log(response.msg);
           this.reloadProductsList.next();
         },
         error => console.error('Error removing article:', error)

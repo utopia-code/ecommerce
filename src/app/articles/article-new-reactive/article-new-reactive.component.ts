@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Article } from '../../models/article';
 import { FormGroup } from '@angular/forms';
 import { Validators, FormBuilder } from '@angular/forms';
-import { CustomValidator } from '../../custom-validator';
+import { CustomValidator } from '../../validators/custom-validator';
 import { ArticleService } from '../../services/article.service';
 
 @Component({

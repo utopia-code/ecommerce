@@ -12,8 +12,7 @@ export class NavbarComponent {
 
   itemsNav: Array<{link: string, component: string}> = [
     {link: 'article-list', component: 'Artículos'},
-    {link: 'new-template', component: 'Nuevo artículo template'},
-    {link: 'new-reactive', component: 'Nuevo artículo reactivo'},
+    {link: 'new-reactive', component: 'Nuevo artículo'},
   ]
 
   showComponent(componentName: string) {
