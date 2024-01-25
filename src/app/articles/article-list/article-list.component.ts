@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Article } from '../../models/article';
-import { ArticleService } from '../../services/article.service';
-import { Observable } from 'rxjs';
-
-import { Subject, merge } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, switchMap,
          distinctUntilChanged, startWith,
-         share } from 'rxjs/operators';
+         share, merge } from 'rxjs/operators';
+
+import { Article } from '../../models/article';
+import { ArticleQuantityChange } from '../../models/article-quantity-change';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-article-list',
@@ -27,16 +27,7 @@ import { debounceTime, switchMap,
     <div class="section-articles">
       <app-article-item *ngFor="let article of articles$ | async; trackBy: trackArticleById" 
         [article]="article"
-        (articleQuantity)="onArticleQuantity($event)">
-        <div class="article-sale"
-            *ngIf="article.isOnSale">
-            <button class="btn btn-dark btn-negative"
-                (click)="removeArticle(article.id, $event)"
-                [disabled]="article.quantityInCart <= 0">&minus;</button>
-            <div class="article-amount">{{ article.quantityInCart }}</div>
-            <button class="btn btn-dark btn-positive"
-            (click)="addArticle(article.id, $event)">&plus;</button>
-        </div>  
+        (quantityChange)="onQuantityChange($event)">
       </app-article-item>
     </div>`,
   styles: [`
@@ -53,70 +44,41 @@ import { debounceTime, switchMap,
       margin: 50px auto 30px;
       max-width: 400px;
     }
-
-    .article-sale {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .article-amount {
-      padding: 1rem;
-    }
-    `]
+    `],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent implements OnInit{
 
   public articles$: Observable<Article[]>;
   public searchString: string = '';
   private searchTerms: Subject<string> = new Subject();
-  private reloadProductsList: Subject<void> = new Subject();
+  private reloadArticleList: Subject<void> = new Subject();
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
-    this.articles$ = merge(
-      this.searchTerms.pipe(
-        startWith(this.searchString),
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((query) => this.articleService.getArticles(query)),
-        share()
-      ),
-      this.reloadProductsList.pipe(
-        switchMap(() => this.articleService.getArticles(this.searchString))
-      )
-    );
+    this.articles$ = this.searchTerms.pipe(
+      startWith(this.searchString),
+      debounceTime(500),
+      distinctUntilChanged(),
+      merge(this.reloadArticleList),
+      switchMap((q) => this.articleService.getArticles(this.searchString)));
   }
 
   search() {
     this.searchTerms.next(this.searchString);
   }
 
-  addArticle(articleID: number, event: Event) {
-    event.preventDefault();
-
-    this.articleService.changeQuantity(articleID, 1)
-      .subscribe(
-        response => {
-          console.log(response.msg);
-          this.reloadProductsList.next();
-        },
-        error => console.error('Error adding article:', error)
-      );
+  onQuantityChange(change: ArticleQuantityChange) {
+    this.articleService.changeQuantity(change.article.id, change.changeInQuantity)
+      .subscribe((res) => {
+        console.log(res.msg);
+        this.reloadArticleList.next();
+      })
   }
 
-  removeArticle(articleID: number, event: Event) {
-    event.preventDefault();
-
-    this.articleService.changeQuantity(articleID, -1)
-      .subscribe(
-        response => {
-          console.log(response.msg);
-          this.reloadProductsList.next();
-        },
-        error => console.error('Error removing article:', error)
-      );
+  onNew() {
+    this.searchTerms.next(this.searchString)
   }
   
   trackArticleById(article) {

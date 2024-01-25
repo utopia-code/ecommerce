@@ -12,7 +12,6 @@
 
 .article-img {
     img {
-        max-width: 100%;
         border-radius: 4px 4px 0px 0px;
     }
 
@@ -37,4 +36,14 @@
     &.disabled {
         filter: opacity(30%)
     }
+}
+
+.article-sale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-amount {
+    padding: 1rem;
 }
