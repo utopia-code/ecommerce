@@ -18,6 +18,7 @@ import { ArticleService } from './services/article.service';
 import { UserService } from './services/user.service';
 import { UserStoreService } from './services/user-store.service';
 import { ArticleAppInterceptor } from './services/article-app.interceptor';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
@@ -52,6 +53,7 @@ registerLocaleData(localeES, 'es-ES', localeESExtra);
     ArticleService,
     UserService,
     UserStoreService,
+    AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ArticleAppInterceptor,
