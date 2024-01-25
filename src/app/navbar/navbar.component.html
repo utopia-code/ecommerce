@@ -1,8 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <div class="navbar-brand" 
-      (click)="showComponent('article-list')"
-      [class.active]="isNavItemActive('article-list')">Inicio</div>
     <button (click)="toogleMenu()" class="navbar-toggler" 
             type="button" 
             data-bs-toggle="collapse" 
@@ -16,10 +13,15 @@
           id="navbarNavAltMarkup"
           [class]="showMenuMobile ? 'show': ''">
       <div class="navbar-nav">
-        <div class="nav-link" 
+        <!-- <div class="nav-link" 
           *ngFor="let item of itemsNav"
           (click)="showComponent(item.link)"
-          [class.active]="isNavItemActive(item.link)">{{ item.component }}</div>
+          [class.active]="isNavItemActive(item.link)">{{ item.component }}</div> -->
+
+          <div class="nav-link" routerLink="/login" routerLinkActive="active">Login</div>
+          <div class="nav-link" routerLink="/register" routerLinkActive="active">Register</div>
+          <div class="nav-link" routerLink="/articles/list" routerLinkActive="active">Article List</div>
+          <div class="nav-link" routerLink="/articles/create" routerLinkActive="active">Create article</div>
       </div>
     </div>
   </div>
