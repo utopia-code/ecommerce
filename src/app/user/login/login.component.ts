@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Login } from '../../models/login';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService) {
+    private userService: UserService,
+    private router: Router) {
     this.createForm();
   }
 
@@ -35,10 +37,11 @@ export class LoginComponent {
         .subscribe((success) => {
           if (success) {
             console.log('Successfully logged in', success);
-            this.loginForm.reset();
+            this.router.navigate(['article', 'create'])
           }
         }, (err) => {
           console.log('Error loggin in', err.error)
+          this.router.navigate(['register'])
         })
     }
   }
