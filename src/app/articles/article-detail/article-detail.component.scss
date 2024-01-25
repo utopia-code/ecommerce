@@ -1,0 +1,46 @@
+.article-container {
+    max-width: 1350px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+
+    &.is-sold-out {
+        filter: grayscale(1); 
+    }
+}
+
+.article-img {
+    &.disabled img {
+        filter: blur(2px)
+    }
+}
+
+.article-price {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: .5rem 0;
+
+    &.disabled {
+        filter: opacity(30%)
+    }
+}
+
+.article-sale {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-amount {
+    padding: 1rem;
+}
+
+@media screen and (min-width: 678px) {
+    .article-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .article-img, .article-body {
+        flex: 0 0 calc(50% - 10px);
+    }
+}

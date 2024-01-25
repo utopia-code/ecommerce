@@ -20,4 +20,30 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticle(+articleID)
       .subscribe(article => this.article = article);
   }
+
+  incrementInCart() {
+    this.article.quantityInCart += 1;
+
+    this.articleService.changeQuantity(this.article.id, 1)
+      .subscribe(
+        (res) => {
+          console.log(res.msg);
+        },
+        error => console.error('Error adding article:', error)
+      );
+  }
+
+  decrementInCart() {
+    if (this.article.quantityInCart > 0) {
+      this.article.quantityInCart -= 1;
+    }
+
+    this.articleService.changeQuantity(this.article.id, -1)
+      .subscribe(
+        (res) => {
+          console.log(res.msg);
+        },
+        error => console.error('Error removing article:', error)
+      );
+  }
 }
