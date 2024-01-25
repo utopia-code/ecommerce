@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CustomValidator } from '../../validators/custom-validator';
 import { ArticleService } from '../../services/article.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-new-reactive',
@@ -17,7 +18,8 @@ export class ArticleNewReactiveComponent {
 
   constructor(
     private fb: FormBuilder,
-    private articleService: ArticleService) {
+    private articleService: ArticleService,
+    private router: Router) {
       this.createForm();
     }
 
@@ -37,11 +39,8 @@ export class ArticleNewReactiveComponent {
       this.articleService.create(newArticle)
       .subscribe((success: any) => {
           if (success) {
-            console.log('Form Control Value', this.reactiveForm.value);
-            console.log('Article object', this.article);
-            console.log(newArticle);
-
-            this.reactiveForm.reset();
+            console.log(success)
+            this.router.navigate(['article', 'list'])
           } 
         }, err => { console.error(`Article with ID ${this.article.id} already exists`, err); });
     } else {
