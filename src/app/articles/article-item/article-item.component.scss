@@ -4,6 +4,7 @@
     margin-bottom: 40px;
     border-radius: 4px;
     border: 1px solid #eee;
+    cursor: pointer;
 
     &.is-sold-out {
         filter: grayscale(1); 

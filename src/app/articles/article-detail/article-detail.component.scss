@@ -9,6 +9,8 @@
 }
 
 .article-img {
+    max-height: 500px;
+    
     &.disabled img {
         filter: blur(2px)
     }
