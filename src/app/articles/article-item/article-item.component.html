@@ -1,5 +1,6 @@
 <div class="article-container"
-    [class]="article.isOnSale ? 'is-on-sale' : 'is-sold-out'">
+    [class]="article.isOnSale ? 'is-on-sale' : 'is-sold-out'"
+    routerLink="/article/{{ article.id }}">
     <div class="article-img"
     [class.active]="article.isOnSale"
     [class.disabled]="!article.isOnSale"><img [src]="article.imageUrl | defectImg" ></div>
