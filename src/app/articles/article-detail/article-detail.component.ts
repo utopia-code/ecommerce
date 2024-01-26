@@ -16,9 +16,9 @@ export class ArticleDetailComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const articleID = this.route.snapshot.paramMap.get('id');
-    this.articleService.getArticle(+articleID)
-      .subscribe(article => this.article = article);
+    this.route.data.subscribe((data: { article: Article}) => {
+      this.article = data.article;
+    })
   }
 
   incrementInCart() {
