@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(): boolean  {
     console.log('AuthGuard canActivate called');
 
-    if (this.userStore.isLoggedIn()) {return true}
+    if (this.userStore.isLoggedIn()) { return true }
 
     console.log('AuthGuard canActivate not authorized to access page');
 

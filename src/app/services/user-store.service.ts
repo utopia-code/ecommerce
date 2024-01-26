@@ -7,10 +7,13 @@ export class UserStoreService {
 
   private _token: string = null;
 
-  constructor() { }
+  constructor() {
+    this._token = localStorage.getItem('authToken')
+  }
 
   set token(token: string) {
     this._token = token;
+    localStorage.setItem('authToken', token);
   }
 
   get token() {
