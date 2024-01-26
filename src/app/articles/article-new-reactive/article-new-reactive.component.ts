@@ -3,6 +3,7 @@ import { Article } from '../../models/article';
 import { FormGroup } from '@angular/forms';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CustomValidator } from '../../validators/custom-validator';
+import { ArticleNewDeactivateGuardService } from '../../guards/article-new-deactivate-guard.service';
 import { ArticleService } from '../../services/article.service';
 import { Router } from '@angular/router';
 
@@ -18,6 +19,7 @@ export class ArticleNewReactiveComponent {
 
   constructor(
     private fb: FormBuilder,
+    private articleNewDeactivateGuardService: ArticleNewDeactivateGuardService,
     private articleService: ArticleService,
     private router: Router) {
       this.createForm();
@@ -40,6 +42,7 @@ export class ArticleNewReactiveComponent {
       .subscribe((success: any) => {
           if (success) {
             console.log(success)
+            this.articleNewDeactivateGuardService.setFormSubmitted(true);
             this.router.navigate(['article', 'list'])
           } 
         }, err => { console.error(`Article with ID ${this.article.id} already exists`, err); });
