@@ -9,10 +9,12 @@ export class NavbarComponent {
 
   showMenuMobile = false;
 
-  // itemsNav: Array<{link: string, component: string}> = [
-  //   {link: 'article-list', component: 'Artículos'},
-  //   {link: 'new-reactive', component: 'Nuevo artículo'},
-  // ]
+  itemsNav: Array<{link: string, name: string}> = [
+    {link: '/user/login', name: 'Login'},
+    {link: '/user/register', name: 'Register'},
+    {link: '/article/list', name: 'Article List'},
+    {link: '/article/create', name: 'Create Article'}
+  ]
   toogleMenu() {
     this.showMenuMobile = !this.showMenuMobile;
   }

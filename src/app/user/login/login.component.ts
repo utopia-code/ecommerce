@@ -41,7 +41,7 @@ export class LoginComponent {
           }
         }, (err) => {
           console.log('Error loggin in', err.error)
-          this.router.navigate(['register'])
+          this.router.navigate(['user', 'register'])
         })
     }
   }

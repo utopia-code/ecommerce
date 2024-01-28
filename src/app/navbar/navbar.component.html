@@ -13,15 +13,10 @@
           id="navbarNavAltMarkup"
           [class]="showMenuMobile ? 'show': ''">
       <div class="navbar-nav">
-        <!-- <div class="nav-link" 
-          *ngFor="let item of itemsNav"
-          (click)="showComponent(item.link)"
-          [class.active]="isNavItemActive(item.link)">{{ item.component }}</div> -->
-
-          <div class="nav-link" routerLink="/login" routerLinkActive="active">Login</div>
-          <div class="nav-link" routerLink="/register" routerLinkActive="active">Register</div>
-          <div class="nav-link" routerLink="/article/list" routerLinkActive="active">Article List</div>
-          <div class="nav-link" routerLink="/article/create" routerLinkActive="active">Create article</div>
+          <div class="nav-link"
+              *ngFor="let item of itemsNav"
+              routerLink="{{ item.link }}"
+              routerLinkActive="active">{{ item.name }}</div>
       </div>
     </div>
   </div>

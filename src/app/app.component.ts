@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
               private router: Router) {}
 
   ngOnInit(): void {
-    this.router.navigate(this.userStore.isLoggedIn() ? ['article', 'list'] : ['login'])
+    this.router.navigate(this.userStore.isLoggedIn() ? ['article', 'list'] : ['user', 'login'])
   }
   
 }

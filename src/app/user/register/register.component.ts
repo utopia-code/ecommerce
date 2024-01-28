@@ -37,7 +37,7 @@ export class RegisterComponent {
         .subscribe((success) => {
           if (success) {
             console.log('Successfully registered', success);
-            this.router.navigate(['login'])
+            this.router.navigate(['user', 'login'])
           }
         }, (err) => {
           console.error('Error registering', err.error)
